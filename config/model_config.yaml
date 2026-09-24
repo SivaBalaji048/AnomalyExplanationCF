@@ -1,2 +1,98 @@
 # Model configuration
 # Contains anomaly detector and counterfactual generation configuration.
+version: "1.0"
+
+data_split:
+  known_normal_filter:
+    column: "Machine failure"
+    value: 0
+
+  known_failure_filter:
+    column: "Machine failure"
+    value: 1
+
+  normal_training_fraction: 0.80
+  normal_heldout_evaluation_fraction: 0.20
+  shuffle: true
+  random_state: 42
+
+  training_policy: >
+    Train only on known-normal records. Keep all known machine-failure
+    records outside model training. Use held-out known-normal records and
+    all known machine-failure records for evaluation.
+
+preprocessing:
+  scaler: "StandardScaler"
+  fit_scaler_on: "normal_training_data_only"
+  missing_value_policy: "reject_unexpected_missing_values"
+  preserve_feature_order: true
+
+detector:
+  name: "IsolationForest"
+
+  parameters:
+    n_estimators: 300
+    max_samples: "auto"
+    max_features: 1.0
+    bootstrap: false
+    contamination: 0.01
+    random_state: 42
+    n_jobs: -1
+
+  prediction_mapping:
+    normal_value: 1
+    anomaly_value: -1
+
+  score_method: "decision_function"
+  score_interpretation: >
+    Higher decision-function values indicate a more normal observation.
+    Lower values indicate a more anomalous observation.
+
+  initial_threshold_policy: >
+    Use Isolation Forest's initial contamination-based decision boundary.
+    Review detector evaluation before changing this value.
+
+evaluation:
+  known_label_column: "Machine failure"
+  positive_label: 1
+
+  detector_metrics:
+    - "precision"
+    - "recall"
+    - "f1_score"
+    - "confusion_matrix"
+
+  reporting_note: >
+    Machine failure is a known dataset label used as an evaluation proxy.
+    It is not used as a model input feature.
+
+counterfactual_search:
+  enabled_after_detector_validation: true
+
+  max_changed_features: 2
+  max_candidates: 5000
+  max_generation_time_seconds: 10
+
+  ranking_priority:
+    - "validity"
+    - "feasibility"
+    - "plausibility"
+    - "sparsity"
+    - "normalized_proximity"
+
+  validity_rule: >
+    A counterfactual is valid only when the same trained Isolation Forest
+    classifies it as normal.
+
+plausibility:
+  enabled_after_baseline_detector_validation: true
+  initial_method: "distance_to_normal_training_distribution"
+  threshold_policy: "derive_from_normal_training_data"
+  note: >
+    The plausibility threshold must be calculated from training data during
+    implementation. Do not invent a fixed physical-safety threshold.
+
+artifacts:
+  model_path: "models/isolation_forest.joblib"
+  scaler_path: "models/scaler.joblib"
+  feature_order_path: "models/feature_order.json"
