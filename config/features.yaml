@@ -1,2 +1,110 @@
 # Feature configuration
 # Defines feature types, mutability, valid ranges, and other feasibility constraints.
+version: "1.0"
+
+dataset:
+  raw_file: "data/raw/ai4i2020.csv"
+  primary_evaluation_label: "Machine failure"
+
+feature_sets:
+  detector_inputs:
+    - "Air temperature [K]"
+    - "Process temperature [K]"
+    - "Rotational speed [rpm]"
+    - "Torque [Nm]"
+    - "Tool wear [min]"
+
+  identifiers:
+    - "UDI"
+    - "Product ID"
+
+  excluded_metadata:
+    - "Type"
+
+  evaluation_labels:
+    - "Machine failure"
+    - "TWF"
+    - "HDF"
+    - "PWF"
+    - "OSF"
+    - "RNF"
+
+counterfactual_policy:
+  mutable_features:
+    - "Rotational speed [rpm]"
+    - "Torque [Nm]"
+
+  immutable_features:
+    - "UDI"
+    - "Product ID"
+    - "Type"
+    - "Air temperature [K]"
+    - "Process temperature [K]"
+    - "Tool wear [min]"
+    - "Machine failure"
+    - "TWF"
+    - "HDF"
+    - "PWF"
+    - "OSF"
+    - "RNF"
+
+  bounds_source: "observed_dataset_values"
+  bounds_are_certified_safety_limits: false
+
+features:
+  "Air temperature [K]":
+    type: "numeric"
+    role: "detector_input"
+    mutable: false
+    min: 295.3
+    max: 304.5
+
+  "Process temperature [K]":
+    type: "numeric"
+    role: "detector_input"
+    mutable: false
+    min: 305.7
+    max: 313.8
+
+  "Rotational speed [rpm]":
+    type: "numeric"
+    role: "detector_input"
+    mutable: true
+    min: 1168
+    max: 2886
+    counterfactual_step: 10
+
+  "Torque [Nm]":
+    type: "numeric"
+    role: "detector_input"
+    mutable: true
+    min: 3.8
+    max: 76.6
+    counterfactual_step: 0.1
+
+  "Tool wear [min]":
+    type: "numeric"
+    role: "detector_input"
+    mutable: false
+    min: 0
+    max: 253
+    note: "Cumulative measure; future versions may model tool replacement as a separate maintenance action."
+
+  "Type":
+    type: "categorical"
+    role: "metadata"
+    mutable: false
+    allowed_values:
+      - "L"
+      - "M"
+      - "H"
+
+  "UDI":
+    type: "identifier"
+    role: "identifier"
+    mutable: false
+
+  "Product ID":
+    type: "identifier"
+    role: "identifier"
+    mutable: false
