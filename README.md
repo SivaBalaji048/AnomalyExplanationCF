@@ -8,6 +8,9 @@ Anomaly detection tells us what looks abnormal. This project goes one step furth
        width="1000">
 </p>
 
+## 🚀 Live Demo
+
+👉 **[Try the Live Application](https://anomalycf.streamlit.app/)**
 ## Overview
 
 Traditional anomaly detection systems (such as Isolation Forests) flag anomalies with a binary label or a numerical outlier score. While this alerts personnel that something is wrong, it fails to answer critical operational questions: Which physical parameters are driving the anomaly? What is the smallest operational change that will restore nominal conditions?
