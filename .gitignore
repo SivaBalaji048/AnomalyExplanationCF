@@ -51,15 +51,55 @@ Thumbs.db
 .coverage
 htmlcov/
 
-# Project specific
+# ============================================================
+# PROJECT-SPECIFIC
+# ============================================================
 
-# Local/private raw datasets
-data/raw/*
-!data/raw/.gitkeep
+# Raw dataset
+# Required by the deployed application — DO NOT IGNORE
+# data/raw/ai4i2020.csv
+
+# Synthetic test datasets
+data/raw/Synthetic_Test_*_clean.csv
 
 # Generated processed data
+# Safe to ignore because preprocessing happens in memory
 data/processed/*
 !data/processed/.gitkeep
 
-# Temporary/debug files
+# ============================================================
+# MODELS
+# ============================================================
+# Required at runtime by the deployed application.
+# DO NOT IGNORE:
+# models/isolation_forest.joblib
+# models/scaler.joblib
+
+# ============================================================
+# REPORTS
+# ============================================================
+# Reports are generated in memory and downloaded by the app.
+# Safe to ignore stored report files.
+reports/*
+!reports/.gitkeep
+
+# ============================================================
+# RESULTS
+# ============================================================
+
+# Analytics metrics are required by the deployed Analytics page.
+# DO NOT IGNORE:
+# results/metrics/*.json
+
+# Analytics plots are required by the deployed Analytics page.
+# DO NOT IGNORE:
+# results/plots/*.png
+
+# Offline explanation exports are not required at runtime.
+results/explanations/*
+!results/explanations/.gitkeep
+
+# ============================================================
+# TEMPORARY / DEBUG
+# ============================================================
 test.json
