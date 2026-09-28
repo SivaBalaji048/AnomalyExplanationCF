@@ -1,0 +1,34 @@
+{
+    "primary_counterfactual_evaluation_cases": 39,
+    "counterfactuals_found": 36,
+    "counterfactuals_not_found": 3,
+    "found_rate_description": "conditional on known failures detected as anomalous",
+    "counterfactual_found_rate_conditional_on_detected_known_failures": 0.9230769230769231,
+    "valid_counterfactuals": 36,
+    "counterfactual_validity_rate_conditional_on_counterfactuals_found": 1.0,
+    "feasible_counterfactuals": 36,
+    "feasibility_rate_conditional_on_counterfactuals_found": 1.0,
+    "plausible_counterfactuals": 9,
+    "plausibility_rate_description": "conditional on counterfactuals found",
+    "plausibility_rate_conditional_on_counterfactuals_found": 0.25,
+    "average_sparsity": 1.0,
+    "average_normalized_proximity": 0.20956401798951274,
+    "average_generation_time_seconds": 0.3262191552382249,
+    "changed_feature_counts": {
+        "Torque [Nm]": 26,
+        "Rotational speed [rpm]": 10
+    },
+    "plausibility_method": "Mahalanobis distance",
+    "plausibility_threshold": 3.170621655699285,
+    "exact_no_counterfactual_evaluation_row_indices": [
+        1954,
+        1955,
+        2166
+    ],
+    "limitations": [
+        "Counterfactuals are not causal root-cause conclusions.",
+        "Suggested changes are not certified-safe actions.",
+        "Suggested changes do not guarantee a real machine repair or failure prevention.",
+        "Results depend on the frozen detector, current data distribution, and configured constraints."
+    ]
+}

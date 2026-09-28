@@ -1,0 +1,19 @@
+{
+    "evaluation_population_description": "held-out normal records plus all known machine-failure records",
+    "evaluation_record_count": 2272,
+    "all_detector_predicted_anomalies": 67,
+    "known_failures_among_anomalies": 39,
+    "known_normal_records_among_anomalies": 28,
+    "primary_counterfactual_evaluation_cases": 39,
+    "performance": {
+        "precision": 0.582089552238806,
+        "recall": 0.11504424778761062,
+        "f1": 0.1921182266009852,
+        "confusion_matrix": {
+            "TN": 1905,
+            "FP": 28,
+            "FN": 300,
+            "TP": 39
+        }
+    }
+}

@@ -41,23 +41,25 @@ env/
 Thumbs.db
 
 # Jupyter Notebook checkpoints
-.ipynb_checkpoints
+.ipynb_checkpoints/
 
 # Streamlit
 .streamlit/
 
-# Project specific: ignore data/models/results contents but keep .gitkeep
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Project specific
+
+# Local/private raw datasets
 data/raw/*
 !data/raw/.gitkeep
+
+# Generated processed data
 data/processed/*
 !data/processed/.gitkeep
-models/*
-!models/.gitkeep
-results/metrics/*
-!results/metrics/.gitkeep
-results/explanations/*
-!results/explanations/.gitkeep
-results/plots/*
-!results/plots/.gitkeep
-reports/*
-!reports/.gitkeep
+
+# Temporary/debug files
+test.json
