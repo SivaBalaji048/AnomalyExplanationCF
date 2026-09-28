@@ -1050,7 +1050,7 @@ def view_analytics():
 # ═══════════════════════════════════════════════════════════════════
 def main():
     st.set_page_config(
-        page_title="Swiss Machine | Explainer",
+        page_title="AnomalyCF",
         page_icon="\u2295",
         layout="wide",
         initial_sidebar_state="collapsed",
