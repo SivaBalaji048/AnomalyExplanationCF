@@ -271,12 +271,11 @@ AnomalyExplanationCF/
 
 1. Clone the repository:
 ```bash
-git clone <YOUR_GITHUB_REPOSITORY_URL>
+git clone <https://github.com/SivaBalaji048/AnomalyExplanationCF>
 cd AnomalyExplanationCF
 ```
 
 2. Create a virtual environment:
-
 **Windows:**
 ```powershell
 python -m venv .venv
